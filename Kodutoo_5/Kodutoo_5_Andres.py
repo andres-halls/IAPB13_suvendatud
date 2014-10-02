@@ -1,5 +1,3 @@
-import re
-
 def file_get_words(*fileNames):
     '''
     Takes a variable number of fileNames and returns
@@ -11,7 +9,7 @@ def file_get_words(*fileNames):
 
     for fileName in fileNames:
         file = open(fileName)
-        words.append(words_in_file_re(file))
+        words.append(words_in_file(file))
         file.close()
 
     return words
@@ -29,6 +27,7 @@ def words_in_file(file):
     word = ""
     
     for char in file_contents:
+        char = char.lower()
         if char.isalpha():
             word += char
         else:
@@ -40,16 +39,6 @@ def words_in_file(file):
         words.append(word)
 
     return words
-
-#######################################
-
-def words_in_file_re(file):
-    '''
-    Returns list of words in a file using regular expression.
-    @arg file - handle to file
-    @returns list of words
-    '''
-    return re.findall(r'\w+', file.read())
 
 #######################################
 
@@ -67,27 +56,31 @@ def print_results(functions, printStrs):
 
 #######################################
 
-file1 = "scarlet.txt"
-file2 = "hound.txt"
-words = file_get_words("scarlet.txt", "hound.txt")
-words_unique = [set(words[0]), set(words[1])]
+def main():
+    file1 = "scarlet.txt"
+    file2 = "hound.txt"
+    words = file_get_words("scarlet.txt", "hound.txt")
+    words_unique = [set(words[0]), set(words[1])]
 
-functions = [
-    lambda: len(words[0]), lambda: len(words[1]),
-    lambda: len(words_unique[0]), lambda: len(words_unique[1]),
-    lambda: len(words_unique[0] | words_unique[1]),
-    lambda: len(words_unique[0] - words_unique[1]),
-    lambda: len(words_unique[1] - words_unique[0]),
-    lambda: len(words_unique[0] & words_unique[1])
-]
+    functions = [
+        lambda: len(words[0]), lambda: len(words[1]),
+        lambda: len(words_unique[0]), lambda: len(words_unique[1]),
+        lambda: len(words_unique[0] | words_unique[1]),
+        lambda: len(words_unique[0] - words_unique[1]),
+        lambda: len(words_unique[1] - words_unique[0]),
+        lambda: len(words_unique[0] & words_unique[1])
+    ]
 
-printStrs = [
-    "words in file " + file1, "words in file " + file2,
-    "unique words in file " + file1, "unique words in file " + file2,
-    "total unique words in files " + file1 + " and " + file2,
-    "unique words in " + file1 + " not present in " + file2,
-    "unique words in " + file2 + " not present in " + file1,
-    "unique words that are in both " + file1 + " and " + file2
-]
+    printStrs = [
+        "words in file " + file1, "words in file " + file2,
+        "unique words in file " + file1, "unique words in file " + file2,
+        "total unique words in files " + file1 + " and " + file2,
+        "unique words in " + file1 + " not present in " + file2,
+        "unique words in " + file2 + " not present in " + file1,
+        "unique words that are in both " + file1 + " and " + file2
+    ]
 
-print_results(functions, printStrs)
+    print_results(functions, printStrs)
+
+if __name__ == "__main__":
+    main()
