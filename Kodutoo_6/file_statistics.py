@@ -2,17 +2,22 @@
 @name File Statistics Module
 @author Andres Liiver
 
-Module processes files and:
-1. Counts how many times all words are found
-2. ...
-... more bleh here
+Module consists of 4 public functions:
+1. process_file
+2. count_words
+3. find_top_words
+4. print_top_words
 '''
 
 def process_file(file):
     '''
     Returns list of words in a file.
-    @arg file - handle to file
-    @returns list of words
+
+    Arguments:
+        file - handle to file
+    
+    Returns:
+        list of words
     '''
     file_contents = file.read()
     words = []
@@ -35,7 +40,13 @@ def process_file(file):
 def count_words(word_list):
     '''
     Returns a dictionary, where key is the word in word_list
-    and the corresponding value is the amount of times it is found.
+    and the corresponding value is the frequency of the word.
+
+    Arguments:
+        word_list - list of words
+
+    Returns:
+        dictionary
     '''
     result = {}
     
@@ -49,11 +60,48 @@ def count_words(word_list):
 
 def find_top_words(dct, n):
     '''
-    Returns a dictionary, where key is
+    Returns a dictionary, where key is the length of the word
+    and the corresponding value is a dictionary where keys are the n most frequent words
+    and the corresponding value is the frequency of the word.
+
+    Arguments:
+        dct - dictionary returned by count_words function
+        n - integer of how many top words to display
+
+    Returns:
+        dictionary
     '''
-    # TODO
-    pass
+    if n < 1:
+        raise Exception("find_top_words: n cannot be less than 1")
+
+    result = {}
+
+    for word in dct.keys():
+        word_length = len(word)
+
+        if word_length in result.keys():
+            if len(result[word_length]) < n:
+                result[word_length][word] = dct[word]
+        else:
+            result[word_length] = {word : dct[word]}
+
+    return result
 
 def print_top_words(dct, file):
-    # TODO
-    pass
+    '''
+    Writes the dictionary returned by find_top_words to a file as a table.
+
+    Arguments:
+        dct - dictionary returned by find_top_words function
+        file - handle of file to write to
+
+    Returns:
+        no return value
+    '''
+    file.write("| length |       word       | count |\n")
+
+    for word_len in dct.keys():
+        for word in dct[word_len].keys():
+            file.write("| " + str(word_len) + " " * (7-len(str(word_len))) \
+               + "| " + word + " " * (17-len(word)) \
+               + "| " + str(dct[word_len][word]) + " " * (6-len(str(dct[word_len][word]))) + "|\n")
