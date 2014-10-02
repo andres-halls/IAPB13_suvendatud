@@ -1,3 +1,9 @@
+'''
+Kodutoo 6
+02.10.2014
+Andres Liiver
+'''
+
 from file_statistics import *
 
 def main():
