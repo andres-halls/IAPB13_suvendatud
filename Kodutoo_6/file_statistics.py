@@ -2,12 +2,15 @@
 @name File Statistics Module
 @author Andres Liiver
 
-Module consists of 4 public functions:
+Module consists of 4 public methods:
 1. process_file
 2. count_words
 3. find_top_words
 4. print_top_words
 '''
+
+class InvalidInputException(Exception):
+    pass
 
 def process_file(file):
     '''
@@ -70,9 +73,12 @@ def find_top_words(dct, n):
 
     Returns:
         dictionary
+
+    Raises:
+        InvalidInputException: if n < 1
     '''
     if n < 1:
-        raise Exception("find_top_words: n cannot be less than 1")
+        raise InvalidInputException("find_top_words: n cannot be less than 1")
 
     result = {}
 
