@@ -64,8 +64,7 @@ def count_words(word_list):
 def find_top_words(dct, n):
     '''
     Returns a dictionary, where key is the length of the word
-    and the corresponding value is a dictionary where keys are the n most frequent words
-    and the corresponding value is the frequency of the word.
+    and the corresponding value is a list of tuples such as (word, frequency)
 
     Arguments:
         dct - dictionary returned by count_words function
@@ -81,15 +80,49 @@ def find_top_words(dct, n):
         raise InvalidInputException("find_top_words: n cannot be less than 1")
 
     result = {}
+    dctFreq = {}
+    dctLen = {}
+
+    # Build a dictionary where key is the frequency
+    # and value is a list of words with that frequency
+
+    for word, freq in dct.items():
+        if freq in dctFreq.keys():
+            dctFreq[freq].append(word)
+        else:
+            dctFreq[freq] = [word]
+
+    # Build a dictionary where key is the word length
+    # and value is a list of words with that length
 
     for word in dct.keys():
-        word_length = len(word)
+        word_len = len(word)
 
-        if word_length in result.keys():
-            if len(result[word_length]) < n:
-                result[word_length][word] = dct[word]
+        if word_len in dctLen.keys():
+            dctLen[word_len].append(word)
         else:
-            result[word_length] = {word : dct[word]}
+            dctLen[word_len] = [word]
+
+    # Build result dictionary
+
+    freqs = sorted(dctFreq.keys(), reverse = True)
+
+    for word_len, word_list in dctLen.items():
+        for freq in freqs:
+            for word in word_list:
+                if word_len in result.keys() and len(result[word_len]) == n:
+                    break
+
+                if word in dctFreq[freq]:
+                    if word_len in result.keys():
+                        result[word_len][word] = freq
+                    else:
+                        result[word_len] = {word : freq}
+
+    # Sort by frequency
+    for key, dct in result.items():
+        result[key] = sorted(dct.items(), key=lambda x:x[0])
+        result[key] = sorted(result[key], key=lambda x:x[1], reverse = True)
 
     return result
 
@@ -106,8 +139,8 @@ def print_top_words(dct, file):
     '''
     file.write("| length |       word       | count |\n")
 
-    for word_len in dct.keys():
-        for word in dct[word_len].keys():
+    for word_len, word_dct in dct.items():
+        for word, freq in word_dct:
             file.write("| " + str(word_len) + " " * (7-len(str(word_len))) \
                + "| " + word + " " * (17-len(word)) \
-               + "| " + str(dct[word_len][word]) + " " * (6-len(str(dct[word_len][word]))) + "|\n")
+               + "| " + str(freq) + " " * (6-len(str(freq))) + "|\n")

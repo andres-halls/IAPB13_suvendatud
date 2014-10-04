@@ -15,7 +15,7 @@ def main():
         try:
             words = process_file(file)
             word_count = count_words(words)
-            top_words = find_top_words(word_count, 100)
+            top_words = find_top_words(word_count, 20)
 
             try:
                 outputFile = open("result.txt", "w", encoding="utf8")
