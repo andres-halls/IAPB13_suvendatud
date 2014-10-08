@@ -1,6 +1,13 @@
 """
 Lecture 7 - OOP (Robot survival / treasure hunt simulator)
 
+Changelog:
+ver 2 = bugfix (width and height typo in print_state())
+ver 3 = added Agent.compass() function to get current heading
+ver 4 = added 90-degree turns and endurance counter (you can do turn(-2) or turn(2) but lose endurance
+        if you have no endurance, then you do a regular 45 degree turn, use this to get out of a certain crash)
+
+
 @author gert
 """
 import hashlib
@@ -13,8 +20,6 @@ class RobotWallCrashException(Exception):
     pass
 class RobotCollisionException(Exception):
     pass
-class RobotDonutsAreBoringException(Exception):
-    pass
 class RobotFoundTreasureException(Exception):
     pass
 class RobotObjectCrashException(Exception):
@@ -24,18 +29,18 @@ class RobotObjectCrashException(Exception):
 class World:
     width = 0
     height = 0
-    robots = [] # Robot state = [x, y, direction, turn, [turn history]]
+    robots = [] # Robot state = [x, y, direction, turn, [turn history], endurance]
     time = 0
     sleep_time = 0
     items = [] # Items in the world= [x, y, type], type = 1 : treasure, type = 2 : obstacle
-    reliability = 1.0
     
-    def __init__(self, width, height, sleep_time = 1, treasure = None, obstacles = None, reliability = 0.9):
-        self.width = width
+    def __init__(self, width, height, sleep_time = 1, treasure = None, obstacles = None, reliability = 0.9, endurance = 1000):
         self.height = height
+        self.width = width
         self.time = 0
         self.sleep_time = sleep_time
         self.reliability = reliability
+        self.endurance = endurance
         random.seed()
         if treasure == None:
             self.items.append([random.randint(0, width-1), random.randint(0, height-1), 1])
@@ -66,7 +71,7 @@ class World:
         if type(x) == int and type(y) == int and type(direction) == int and \
         x >= 0 and x < self.width and y >= 0 and  y < self.height and \
         direction >= 0 and direction < 8:
-            self.robots.append([x, y, direction, 0, []])
+            self.robots.append([x, y, direction, 0, [], self.endurance])
             return len(self.robots)-1
         raise RegistrationException
         
@@ -82,12 +87,6 @@ class World:
         print("[Turn " + str(self.time) + "] Tick tock...")
         directions = [(0, -1), (1, -1), (1, 0), (1, 1), (0, 1), (-1, 1), (-1, 0), (-1, -1)]
         for i in range(len(self.robots)):
-            self.robots[i][4].insert(0, self.robots[i][3])
-            if(abs(sum(self.robots[i][4])) == 8):
-                self.robots = []
-                raise RobotDonutsAreBoringException
-            if len(self.robots[i][4]) > 7:
-                self.robots[i][4].pop()
             self.robots[i][2] = (self.robots[i][2] + self.robots[i][3]) % 8
             self.robots[i][3] = 0
             self.robots[i][0] += directions[self.robots[i][2]][0]
@@ -118,6 +117,9 @@ class World:
         for i in range(1, 3):
             check_x = self.robots[ID][0] + (directions[direction][0] * i)
             check_y = self.robots[ID][1] + (directions[direction][1] * i)
+            for robot in self.robots:
+                if robot[0] == check_x and robot[1] == check_y:
+                    return (i, robot[2]) # Robot detected
             for item in self.items:
                 if check_x == item[0] and check_y == item[1]:
                     if item[2] == 1:
@@ -126,22 +128,34 @@ class World:
                         return (i, -2) # Detected obstacle
             if check_x < 0 or check_y < 0 or check_x >= self.width or check_y >= self.height:
                 return (i, -1) # Wall detected
-            for robot in self.robots:
-                if robot[0] == check_x and robot[1] == check_y:
-                    return (i, robot[2]) # Robot detected
         return None
         
     
     def __turn__(self, ID, direction):
-        if abs(direction) == 1: 
+        if abs(direction) == 2:
+            if self.robots[ID][5] > 0:
+                print("*creak*shriek* The cogs rattle and tires squeal as the robot frantically turns!")
+                self.robots[ID][3] = direction
+                self.robots[ID][5] -= 1
+                return
+            else:
+                if direction > 0:
+                    direction -= 1
+                else:
+                    direction += 1
+        if abs(direction) <= 2:
             self.robots[ID][3] = direction
+            
+            
+    def __compass__(self, ID):
+        return self.robots[ID][2]
         
     def print_state(self):
         """
         Prints the state of the world
         """
         grid = [["." for _ in range(self.width)] for _ in range(self.height)]
-        #icons = ["^", "/", ">", "\\", "|", "/", "<", "\\"] # ASCII, uncomment if problems
+        #icons = ["^", "/", ">", "\\", "|", "/", "<", "\\"] # NON-UNICODE, uncomment if problems
         icons = [chr(0x2191), chr(0x2197), chr(0x2192), chr(0x2198), \
                  chr(0x2193), chr(0x2199), chr(0x2190), chr(0x2196)]
         for robot in self.robots:
@@ -152,12 +166,17 @@ class World:
             elif item[2] == 2:
                 grid[item[1]][item[0]] = "*"
         print("-"*(self.width+2))
-        for i in range(self.width):
+        for i in range(self.height):
             print("|", end="")
-            for j in range(self.height):
+            for j in range(self.width):
                 print(grid[i][j], end="")
             print("|")
         print("-"*(self.width+2))
+        
+    def __iadd__(self, other):
+        for _ in range(other):
+            self.tick()
+        return self
         
 class Agent:
     """
@@ -207,12 +226,22 @@ class Agent:
         
         Args:
             world: the instance of the world
-            direction: turn direction  -1 = left, 1 = right
+            direction: turn direction  -2 = hard left (-90 degrees), -1 = left (-45 degrees), 1 = right (45 degrees), 2 = hard right(+90 degrees)
             
         Returns:
             None
         """
-        world.__turn__(self.ID, direction)
+        world.__turn__(self.ID, int(direction))
+        
+        
+    def compass(self, world):
+        """
+        Returns the current heading
+        
+        Returns:
+            Current heading (0..7)
+        """
+        return world.__compass__(self.ID)
 
 if __name__ == "__main__":
     print("You are supposed to import this file via 'import simulator', not run it!")
