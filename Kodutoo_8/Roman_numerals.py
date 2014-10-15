@@ -40,7 +40,7 @@ def convert(input):
                     sum = sum + 500
             elif char == 'C':
                 if larger_number_after(i, char, input):
-                    sum -= sum - 100
+                    sum = sum - 100     # bug here, was: sum -= sum - 100
                 else:
                     sum = sum + 100
             elif char == 'L':
@@ -64,6 +64,8 @@ def convert(input):
                 else:
                     sum = sum + 1
         return sum
+    else:
+        return -1 # added else
     
 def check_separation(string):
     numerals = [("I", 1), ("V", 5), ("X", 10), ("L", 50), ("C", 100), ("D", 500), ("M", 1000)]
@@ -76,6 +78,8 @@ def check_separation(string):
                 if i < len(string)-1 and char != 'I':
                     if string[i+1] == "M" and string[i] == "C" or \
                     string[i+1] == "X" and string[i] == "C" or \
+                    string[i+1] == "C" and string[i] == "X" or \
+                    string[i+1] == "D" and string[i] == "C" or \
                     string[i+1] == "L" and string[i] == "X":
                         pass
                     elif string[i+1] == numerals[j][0]:

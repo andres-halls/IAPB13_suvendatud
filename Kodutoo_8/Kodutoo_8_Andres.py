@@ -6,18 +6,40 @@ Andres Liiver
 
 import unittest
 from Roman_numerals import convert
-import re
 
 class Test(unittest.TestCase):
     def test_1(self):
-        file = open("roman_numerals.txt")
+        self.assertEqual(convert("I"), 1)
 
-        for line in file:
-            test = re.findall(r'[^,;\s]+', line)
-            print(test)
-            self.assertEqual(convert(test[0]), int(test[1]))
+    def test_2(self):
+        self.assertEqual(convert("IV"), 4)
 
-        file.close()
+    def test_3(self):
+        self.assertEqual(convert("VI"), 6)
+
+    def test_4(self): # initially fails
+        self.assertEqual(convert("XC"), 90)
+
+    def test_5(self): # initially fails
+        self.assertEqual(convert("CD"), 400)
+
+    def test_6(self):
+        self.assertEqual(convert("MMMMCMXCIX"), 4999)
+
+    def test_7(self):
+        self.assertEqual(convert("IIV"), -1)
+
+    def test_8(self):
+        self.assertEqual(convert("XXXXX"), -1)
+
+    def test_9(self):
+        self.assertEqual(convert("LLCDD"), -1)
+
+    def test_91(self):
+        self.assertEqual(convert("blah"), -1)
+
+    def test_92(self):
+        self.assertEqual(convert(10), -1) # intially returned None
         
 if __name__ == "__main__":
     unittest.main(verbosity=5, exit=False)
