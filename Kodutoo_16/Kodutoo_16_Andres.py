@@ -4,9 +4,14 @@ Kodutoo 16
 Andres Liiver
 '''
 
-import timeit as t
-from matplotlib import pyplot
+import time
+from matplotlib import pyplot as plt
 from Tund16gen import *
+
+def timeFunc(func, *args):
+    start = time.clock()
+    func(*args)
+    return time.clock() - start
 
 def linear_search(lst, num):
     for item in lst:
@@ -20,7 +25,7 @@ def binary_search(lst, num, sort=False):
         lst = sorted(lst)
 
     imin = 0
-    imax = len(lst)
+    imax = len(lst)-1
 
     while imax >= imin:
         imid = (imin+imax) // 2
@@ -38,20 +43,31 @@ def main():
     linearTimes = []
     binary1Times = []
     binary2Times = []
+    ns = [2**i for i in range(1, 20)]
 
-    for i in range(16):
-        n = 2**i
+    for n in ns:
         gen = gimme_my_input(n, "blah")
+        needle = next(gen[1])
 
         # linear search test
-        linearTimes.append(t.timeit("linear_search(gen[0], next(gen[1]))", "from __main__ import linear_search", number = 1))
+        linearTimes.append(timeFunc(linear_search, gen[0], needle))
 
         # binary search test 1
-        sortedData = sorted(gen[0])
-        #binary1Times.append(binary_search(sortedData, next(gen[1])))
+        sortedList = sorted(gen[0])
+        binary1Times.append(timeFunc(binary_search, sortedList, needle))
 
         # binary search test 2
-        #binary_search(gen[0], next(gen[1]), True)
+        binary2Times.append(timeFunc(binary_search, gen[0], needle, True))
+
+    # plot the times
+    ax = plt.subplot()
+    ax.set_xlabel("n")
+    ax.set_ylabel("Time (s)")
+    ax.plot(ns, linearTimes, "r", label="Linear Search")
+    ax.plot(ns, binary1Times, "g", label="Binary Search (presorted)")
+    ax.plot(ns, binary2Times, "b", label="Binary Search (sort)")
+    ax.legend(loc="upper left", shadow=True);
+    plt.show()
 
 if __name__ == "__main__":
     main()
