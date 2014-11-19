@@ -59,6 +59,35 @@ def main():
         # binary search test 2
         binary2Times.append(timeFunc(binary_search, gen[0], needle, True))
 
+    # print table of results
+    print("| algorithm \t| n \t\t| time (s)")
+    print()
+
+    # print Linear Search
+    for i, n in enumerate(ns):
+        if n < 10000:
+            print("| {0} \t| {1} \t\t| {2:.8f}".format("Linear", n, linearTimes[i]))
+        else:
+            print("| {0} \t| {1} \t| {2:.8f}".format("Linear", n, linearTimes[i]))
+
+    print()
+
+    # print Binary Search (presorted)
+    for i, n in enumerate(ns):
+        if n < 10000:
+            print("| {0} | {1} \t\t| {2:.8f}".format("Bin (presort)", n, binary1Times[i]))
+        else:
+            print("| {0} | {1} \t| {2:.8f}".format("Bin (presort)", n, binary1Times[i]))
+
+    print()
+
+    # print Binary Search (sort)
+    for i, n in enumerate(ns):
+        if n < 10000:
+            print("| {0} \t| {1} \t\t| {2:.8f}".format("Bin (sort)", n, binary2Times[i]))
+        else:
+            print("| {0} \t| {1} \t| {2:.8f}".format("Bin (sort)", n, binary2Times[i]))
+
     # plot the times
     ax = plt.subplot()
     ax.set_xlabel("n")
