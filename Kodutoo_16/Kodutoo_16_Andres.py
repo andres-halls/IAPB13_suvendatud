@@ -91,7 +91,9 @@ def main():
     # plot the times
     ax = plt.subplot()
     ax.set_xlabel("n")
+    ax.set_xscale("log")
     ax.set_ylabel("Time (s)")
+    ax.set_yscale("log")
     ax.plot(ns, linearTimes, "r", label="Linear Search")
     ax.plot(ns, binary1Times, "g", label="Binary Search (presorted)")
     ax.plot(ns, binary2Times, "b", label="Binary Search (sort)")
