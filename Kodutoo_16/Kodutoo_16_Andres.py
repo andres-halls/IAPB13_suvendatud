@@ -43,21 +43,37 @@ def main():
     linearTimes = []
     binary1Times = []
     binary2Times = []
-    ns = [2**i for i in range(1, 20)]
+    ns = [2**i for i in range(1, 13)]
 
     for n in ns:
-        gen = gimme_my_input(n, "blah")
-        needle = next(gen[1])
+        lst, gen = gimme_my_input(n, "blah")
+        times = []
 
         # linear search test
-        linearTimes.append(timeFunc(linear_search, gen[0], needle))
+        for i in range(len(lst)):
+            times.append(timeFunc(linear_search, lst, next(gen)))
+
+        avg_time = sum(times) / len(times)
+        linearTimes.append(avg_time)
 
         # binary search test 1
-        sortedList = sorted(gen[0])
-        binary1Times.append(timeFunc(binary_search, sortedList, needle))
+        times = []
+        sortedList = sorted(lst)
+
+        for i in range(len(lst)):
+            times.append(timeFunc(binary_search, sortedList, next(gen)))
+
+        avg_time = sum(times) / len(times)
+        binary1Times.append(avg_time)
 
         # binary search test 2
-        binary2Times.append(timeFunc(binary_search, gen[0], needle, True))
+        times = []
+
+        for i in range(len(lst)):
+            times.append(timeFunc(binary_search, lst, next(gen), True))
+
+        avg_time = sum(times) / len(times)
+        binary2Times.append(avg_time)
 
     # print table of results
     print("| algorithm \t| n \t\t| time (s)")
