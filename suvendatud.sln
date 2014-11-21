@@ -1,0 +1,84 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "Kodutoo_1", "Kodutoo_1\Kodutoo_1.pyproj", "{E71CE774-7A44-440D-9BA9-2A41F55AEFFE}"
+EndProject
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "Kodutoo_2", "Kodutoo_2\Kodutoo_2.pyproj", "{85588C98-9888-4319-A716-53499194D1D9}"
+EndProject
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "Kodutoo_3", "Kodutoo_3\Kodutoo_3.pyproj", "{2DD6D1CC-EDBA-4AB5-A3A8-1A15BE44C333}"
+EndProject
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "Kodutoo_4", "Kodutoo_4\Kodutoo_4.pyproj", "{E12EA639-ED25-4662-A95C-051C414966F5}"
+EndProject
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "Kodutoo_5", "Kodutoo_5\Kodutoo_5.pyproj", "{114F5316-91D8-4276-BB7F-757CAC01BFB6}"
+EndProject
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "Kodutoo_6", "Kodutoo_6\Kodutoo_6.pyproj", "{00D3628E-D214-4ECA-99AD-B6E9758AFACD}"
+EndProject
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "Kodutoo_7", "Kodutoo_7\Kodutoo_7.pyproj", "{BB44E021-F4B8-49FF-940F-610A4B64C981}"
+EndProject
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "Kodutoo_8", "Kodutoo_8\Kodutoo_8.pyproj", "{EB6D2AE8-B32F-4A76-890A-E2615408791E}"
+EndProject
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "Kodutoo_9", "Kodutoo_9\Kodutoo_9.pyproj", "{8CEFD2BE-5226-4867-AE7C-78A9F05D844E}"
+EndProject
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "Kodutoo_10", "Kodutoo_10\Kodutoo_10.pyproj", "{B73A98AD-E051-46B1-B30B-0191F4275BEC}"
+EndProject
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "Kodutoo_11", "Kodutoo_11\Kodutoo_11.pyproj", "{E09C9C9C-DD5E-46DF-8190-A339E332AE8A}"
+EndProject
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "Kodutoo_12", "Kodutoo_12\Kodutoo_12.pyproj", "{C81851B9-FEA7-4F4E-9CD6-4DBA4E5F7861}"
+EndProject
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "Kodutoo_13", "Kodutoo_13\Kodutoo_13.pyproj", "{40FE58A8-6B21-48F5-A25D-F58CC39FB548}"
+EndProject
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "Kodutoo_14", "Kodutoo_14\Kodutoo_14.pyproj", "{FE44874F-4915-4281-865E-B3AC48F2F5F4}"
+EndProject
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "Kodutoo_15", "Kodutoo_15\Kodutoo_15.pyproj", "{1EE087EB-BEC9-4297-96F3-65E1C8E066BB}"
+EndProject
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "Kodutoo_16", "Kodutoo_16\Kodutoo_16.pyproj", "{BE7A0525-85CB-4AAF-8ED9-9FBA862F931B}"
+EndProject
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "Kodutoo_17", "Kodutoo_17\Kodutoo_17.pyproj", "{EE858384-0BFA-40CD-A276-413F13C62277}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E71CE774-7A44-440D-9BA9-2A41F55AEFFE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E71CE774-7A44-440D-9BA9-2A41F55AEFFE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{85588C98-9888-4319-A716-53499194D1D9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{85588C98-9888-4319-A716-53499194D1D9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2DD6D1CC-EDBA-4AB5-A3A8-1A15BE44C333}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2DD6D1CC-EDBA-4AB5-A3A8-1A15BE44C333}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E12EA639-ED25-4662-A95C-051C414966F5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E12EA639-ED25-4662-A95C-051C414966F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{114F5316-91D8-4276-BB7F-757CAC01BFB6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{114F5316-91D8-4276-BB7F-757CAC01BFB6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{00D3628E-D214-4ECA-99AD-B6E9758AFACD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{00D3628E-D214-4ECA-99AD-B6E9758AFACD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BB44E021-F4B8-49FF-940F-610A4B64C981}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BB44E021-F4B8-49FF-940F-610A4B64C981}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EB6D2AE8-B32F-4A76-890A-E2615408791E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EB6D2AE8-B32F-4A76-890A-E2615408791E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8CEFD2BE-5226-4867-AE7C-78A9F05D844E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8CEFD2BE-5226-4867-AE7C-78A9F05D844E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B73A98AD-E051-46B1-B30B-0191F4275BEC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B73A98AD-E051-46B1-B30B-0191F4275BEC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E09C9C9C-DD5E-46DF-8190-A339E332AE8A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E09C9C9C-DD5E-46DF-8190-A339E332AE8A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C81851B9-FEA7-4F4E-9CD6-4DBA4E5F7861}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C81851B9-FEA7-4F4E-9CD6-4DBA4E5F7861}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{40FE58A8-6B21-48F5-A25D-F58CC39FB548}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{40FE58A8-6B21-48F5-A25D-F58CC39FB548}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FE44874F-4915-4281-865E-B3AC48F2F5F4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FE44874F-4915-4281-865E-B3AC48F2F5F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1EE087EB-BEC9-4297-96F3-65E1C8E066BB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1EE087EB-BEC9-4297-96F3-65E1C8E066BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BE7A0525-85CB-4AAF-8ED9-9FBA862F931B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BE7A0525-85CB-4AAF-8ED9-9FBA862F931B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EE858384-0BFA-40CD-A276-413F13C62277}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EE858384-0BFA-40CD-A276-413F13C62277}.Release|Any CPU.ActiveCfg = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
