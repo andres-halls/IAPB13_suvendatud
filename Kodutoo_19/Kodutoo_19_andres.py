@@ -14,9 +14,9 @@ def dfs1(graph, source, target):
     nodesSearched = 0
 
     while S != []:
-        nodesSearched += 1
         node = S.pop()
         if node not in discovered:
+            nodesSearched += 1
             discovered.add(node)
             for adjacentNode in graph[node]:
                 if adjacentNode not in discovered:
@@ -27,12 +27,11 @@ def dfs1(graph, source, target):
 # recursive
 def dfs2(graph, source, target, _discovered = set()):
     _discovered.add(source)
-    nodesSearched = 0
+    nodesSearched = 1
 
     for node in reversed(graph[source]):
-        nodesSearched += 1
         if node not in _discovered:
-            return nodesSearched + dfs2(graph, node, target, _discovered)
+            nodesSearched += dfs2(graph, node, target, _discovered)
 
     return nodesSearched
 
@@ -44,15 +43,15 @@ def main():
 
     for i in range(3, 10):
         print()
-        G = nx.fast_gnp_random_graph(2**i, random.uniform(0.0, 0.3), 142443)
+        G = nx.fast_gnp_random_graph(2**i, random.uniform(0.0, 0.5), 142443)
         graph = nx.to_dict_of_lists(G)
         tests1 = []
         tests2 = []
 
-        for n in range(100):
+        for n in range(123):
             while True:
-                source = random.randrange(0, len(graph))
-                target = random.randrange(0, len(graph))
+                source = random.randrange(0, len(graph)-1)
+                target = random.randrange(0, len(graph)-1)
                 if source != target: break
 
             tests1.append(dfs1(graph, source, target))
