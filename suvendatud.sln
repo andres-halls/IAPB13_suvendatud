@@ -41,6 +41,8 @@ Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "Kodutoo_18", "Kodutoo_18\Ko
 EndProject
 Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "Kodutoo_19", "Kodutoo_19\Kodutoo_19.pyproj", "{01DBECC1-E48B-4C68-830D-05ACF9F4FFDF}"
 EndProject
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "Kodutoo_20", "Kodutoo_20\Kodutoo_20.pyproj", "{4B4E0C1A-5CCF-4A47-B8AB-A377A802B209}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -85,6 +87,8 @@ Global
 		{00F23B96-9997-4030-ABF6-DC3DD7A95905}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{01DBECC1-E48B-4C68-830D-05ACF9F4FFDF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{01DBECC1-E48B-4C68-830D-05ACF9F4FFDF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4B4E0C1A-5CCF-4A47-B8AB-A377A802B209}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4B4E0C1A-5CCF-4A47-B8AB-A377A802B209}.Release|Any CPU.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
